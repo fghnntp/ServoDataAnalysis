@@ -37,12 +37,9 @@ def get_WH_threefile_data(WH_filename1, WH_filename2, WH_filename3,
                           WH_data_trace_1_1, WH_data_trace_1_2, WH_data_trace_1_3,
                           WH_data_trace_2_1, WH_data_trace_2_2, WH_data_trace_2_3,
                           WH_data_trace_3_1, WH_data_trace_3_2, WH_data_trace_3_3):
-    get_data(WH_filename1, WH_data_trace_1_1,
-             WH_data_trace_1_2, WH_data_trace_1_3)
-    get_data(WH_filename2, WH_data_trace_2_1,
-             WH_data_trace_2_2, WH_data_trace_2_3)
-    get_data(WH_filename3, WH_data_trace_3_1,
-             WH_data_trace_3_2, WH_data_trace_3_3)
+    get_data(WH_filename1, WH_data_trace_1_1, WH_data_trace_1_2, WH_data_trace_1_3)
+    get_data(WH_filename2, WH_data_trace_2_1, WH_data_trace_2_2, WH_data_trace_2_3)
+    get_data(WH_filename3, WH_data_trace_3_1, WH_data_trace_3_2, WH_data_trace_3_3)
 
 
 def get_L_threefile_data(L_filename1, L_filename2, L_filename3,
@@ -54,7 +51,7 @@ def get_L_threefile_data(L_filename1, L_filename2, L_filename3,
     get_data(L_filename3, L_data_trace_3_1, L_data_trace_3_2, L_data_trace_3_3)
 
 
-def plot_three_figure_func(filename1, filename2, filename3, filename4, filename5, filename6, ratio):
+def plot_four_figure_func(filename1, filename2, filename3, filename4, filename5, filename6, ratio):
     inter_ratio = ratio
     WH_data_trace_1_1 = []
     WH_data_trace_1_2 = []
@@ -75,7 +72,7 @@ def plot_three_figure_func(filename1, filename2, filename3, filename4, filename5
     L_data_trace_3_2 = []
     L_data_trace_3_3 = []
     get_WH_threefile_data(filename1, filename2, filename3,
-                          WH_data_trace_1_1, WH_data_trace_1_1, WH_data_trace_1_1,
+                          WH_data_trace_1_1, WH_data_trace_1_2, WH_data_trace_1_3,
                           WH_data_trace_2_1, WH_data_trace_2_2, WH_data_trace_2_3,
                           WH_data_trace_3_1, WH_data_trace_3_2, WH_data_trace_3_3)
     get_L_threefile_data(filename4, filename5, filename6,
@@ -83,15 +80,15 @@ def plot_three_figure_func(filename1, filename2, filename3, filename4, filename5
                          L_data_trace_2_1, L_data_trace_2_2, L_data_trace_2_3,
                          L_data_trace_3_1, L_data_trace_3_2, L_data_trace_3_3)
     # WH指令速度 Y轴
-    WH_data_trace_1 = WH_data_trace_1_1 + WH_data_trace_1_2 + WH_data_trace_1_3
-    WH_data_trace_2 = WH_data_trace_2_1 + WH_data_trace_2_2 + WH_data_trace_2_3
+    WH_data_trace_1 = WH_data_trace_1_1 + WH_data_trace_2_1 + WH_data_trace_3_1
+    WH_data_trace_2 = WH_data_trace_1_2 + WH_data_trace_2_2 + WH_data_trace_3_2
     # WH指令力矩 Y轴
-    WH_data_trace_3 = WH_data_trace_3_1 + WH_data_trace_3_2 + WH_data_trace_3_3
+    WH_data_trace_3 = WH_data_trace_1_3 + WH_data_trace_2_3 + WH_data_trace_3_3
     # L指令速度 Y轴
-    L_data_trace_1 = L_data_trace_1_1 + L_data_trace_1_2 + L_data_trace_1_3
-    L_data_trace_2 = L_data_trace_2_1 + L_data_trace_2_2 + L_data_trace_2_3
+    L_data_trace_1 = L_data_trace_1_1 + L_data_trace_2_1 + L_data_trace_3_1
+    L_data_trace_2 = L_data_trace_1_2 + L_data_trace_2_2 + L_data_trace_3_2
     # L指令力矩 Y轴
-    L_data_trace_3 = L_data_trace_3_1 + L_data_trace_3_2 + L_data_trace_3_3
+    L_data_trace_3 = L_data_trace_1_3 + L_data_trace_2_3 + L_data_trace_3_3
 
     # WH速度指令 x轴
     WH_vx = [inter_ratio*i for i in range(len(WH_data_trace_1))]
@@ -165,17 +162,14 @@ def plot_three_figure_func(filename1, filename2, filename3, filename4, filename5
     axs[2].plot(WH_jx, WH_j_data, label='WH_CMDJ', color='blue')
     axs[2].plot(L_jx, L_j_data, label='L_CMDJ', color='red')
     axs[3].plot(WH_tx, WH_data_trace_3, label='WH_CMDT', color='blue')
-    axs[3].plot(L_tx, L_data_trace_3, label='WH_CMDT', color='red')
+    axs[3].plot(L_tx, L_data_trace_3, label='L_CMDT', color='red')
 
-    # axs[1][0].plot(Lx1, Ldata_trace_1, label='CMDV', color='blue')
-    # axs[1][1].plot(Lx2, Ldata_trace_2, label='CMDA', color='green')
-    # axs[1][2].plot(Lx3, Ldata_trace_3, label='CMDT', color='red')
     for i in range(4):
         axs[i].legend()
-    #plt.savefig(filename1[left_edge1:right_edge1] +
-    #             '-'+filename4[left_edge2:right_edge2]+'.png', dpi=600, format="png")
-    fig.canvas.manager.full_screen_toggle()  # toggle fullscreen mode
-    plt.show()
+    plt.savefig(filename1[left_edge1:right_edge1] +
+                '-'+filename4[left_edge2:right_edge2]+'.png', dpi=600, format="png")
+    #fig.canvas.manager.full_screen_toggle()  # toggle fullscreen mode
+    #plt.show()
 
 
 def plot_func(filename1, filename2, ratio):
@@ -238,10 +232,10 @@ def plot_func(filename1, filename2, ratio):
     for i in range(2):
         for j in range(3):
             axs[i][j].legend()
-    fig.canvas.manager.full_screen_toggle()  # toggle fullscreen mode
-    plt.show()
-    #plt.savefig(filename1[left_edge1:right_edge1]+'-'+filename2[left_edge2:right_edge2]+'.png',dpi=365, format='png')
-    #plt.savefig(filename1[left_edge1:right_edge1]+'-'+filename2[left_edge2:right_edge2]+'.svg', format='svg')
+    #fig.canvas.manager.full_screen_toggle()  # toggle fullscreen mode
+    #plt.show()
+    plt.savefig(filename1[left_edge1:right_edge1]+'-'+filename2[left_edge2:right_edge2]+'.png',dpi=365, format='png')
+    plt.savefig(filename1[left_edge1:right_edge1]+'-'+filename2[left_edge2:right_edge2]+'.svg', format='svg')
 
 
 def get_filename(filepath, return_filenames):
@@ -262,8 +256,11 @@ def save_data_picture():
     WH_filenames = []
     L_filenames = []
     filename = []
-    file_path1 = '麦迪克数据可视化\麦迪克加工问题调查\采样数据-维宏'
+    file_path1 = '麦迪克数据可视化\麦迪克加工问题调查\维宏丝杆-32导程'
     file_path2 = '麦迪克数据可视化\麦迪克加工问题调查\采样数据-LYNUC'
+    
+    # file_path1 = '麦迪克数据可视化\麦迪克加工问题调查\采样数据-维宏'
+    # file_path2 = '麦迪克数据可视化\麦迪克加工问题调查\采样数据-LYNUC'
     get_filename(file_path1, WH_filenames)
     get_filename(file_path2, L_filenames)
     in_list = []
@@ -293,32 +290,13 @@ def save_data_picture():
         file_list.append(tuple_list)
     for i in file_list:
         for j in i:
-            print(type(j))
+            print(j)
         print()
 
     for i in file_list:
         ratio = eval(i[0][i[0].rfind('\\')+3])
-        plot_three_figure_func(i[0], i[1], i[2], i[3], i[4], i[5], ratio*0.001)
+        plot_four_figure_func(i[0], i[1], i[2], i[3], i[4], i[5], ratio*0.001)
 
-    # for i in range(len(WH_filenames)):
-    #     for j in range(len(L_filenames)):
-    #         WH_left_edge = WH_filenames[i].rfind('\\') + 3
-    #         WH_right_edge = WH_filenames[i].rfind('.')
-    #         L_left_edge = L_filenames[j].rfind('\\') + 3
-    #         L_right_edge = L_filenames[j].rfind('.')
-    #         # print(WH_filenames[i][WH_left_edge:WH_right_edge])
-    #         # print(L_filenames[j][L_left_edge:L_right_edge])
-    #         if WH_filenames[i][WH_left_edge:WH_right_edge] == L_filenames[j][L_left_edge:L_right_edge]:
-    #             print(WH_filenames[i])
-    #             print(L_filenames[j])
-    #             print()
-    #             # #print(WH_filenames[i][WH_left_edge:WH_right_edge][0])
-    #             # if WH_filenames[i][WH_left_edge:WH_right_edge][0] == '1':
-    #             #     plot_func_add_j(WH_filenames[i], L_filenames[j], 0.001)
-    #             #     #plot_func(WH_filenames[i], L_filenames[j], 0.001)
-    #             # elif WH_filenames[i][WH_left_edge:WH_right_edge][0] == '2':
-    #             #     plot_func_add_j(WH_filenames[i], L_filenames[j], 0.002)
-    #             #     #plot_func(WH_filenames[i], L_filenames[j], 0.002)
 
 
 def main():
@@ -328,9 +306,9 @@ def main():
     filename4 = '麦迪克数据可视化\麦迪克加工问题调查\采样数据-LYNUC\L-1ms-斜边X-V1.std'
     filename5 = '麦迪克数据可视化\麦迪克加工问题调查\采样数据-LYNUC\L-1ms-斜边X-V2.std'
     filename6 = '麦迪克数据可视化\麦迪克加工问题调查\采样数据-LYNUC\L-1ms-斜边X-V3.std'
-    plot_three_figure_func(filename1, filename2, filename3,
+    plot_four_figure_func(filename1, filename2, filename3,
                            filename4, filename5, filename6, 0.001)
 
 if __name__ == "__main__":
-    #save_data_picture()
-    main()
+    save_data_picture()
+    #main()
