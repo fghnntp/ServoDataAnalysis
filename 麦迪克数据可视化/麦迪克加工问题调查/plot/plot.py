@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 from pylab import mpl
 
-mpl.rcParams['font.sans-serif'] = ['MicroSoft YaHei'] # 指定默认字体
+mpl.rcParams['font.sans-serif'] = ['fangsong'] # 指定默认字体
 mpl.rcParams['axes.unicode_minus'] = False # 解决保存图像是负号'-'显示为方块的问题
 
 def get_data(filename, list_ch1, list_ch2, list_ch3):
@@ -135,7 +135,100 @@ def plot_func_add_j(filename1, filename2, ratio):
         _ = (Ldata_trace_2[i+1]-Ldata_trace_2[i])/ratio_inter
         Ldata_trace_4.append(_)
     Lx4 = [ratio_inter*i for i in range(len(Ldata_trace_4))]
+
+
+
+    WH_v = WHdata_trace_3
+    WH_v_x = [0.002*i for i in range(len(WH_v))]
+    L_v = Ldata_trace_3
+    L_v_x = [0.002*i for i in range(len(L_v))]
     
+    WH_a = []
+    for i in range(len(WH_v)-1):
+        data = (WH_v[i+1] - WH_v[i])/0.002
+        WH_a.append(data)
+    WH_a_x = [0.002*i for i in range(len(WH_a))]
+    L_a = []
+    for i in range(len(L_v)-1):
+        data = (L_v[i+1] - L_v[i])/0.002
+        L_a.append(data)
+    L_a_x = [0.002*i for i in range(len(L_a))]
+
+    WH_j = []
+    for i in range(len(WH_a)-1):
+        data = (WH_a[i+1] - WH_a[i])/0.002
+        WH_j.append(data)
+    WH_j_x = [0.002*i for i in range(len(WH_j))]
+    L_j = []
+    for i in range(len(L_a)-1):
+        data = (L_a[i+1] - L_a[i])/0.002
+        L_j.append(data)
+    L_j_x = [0.002*i for i in range(len(L_j))]
+
+    WH_t = WHdata_trace_2
+    WH_t_x = [0.002*i for i in range(len(WH_t))]
+    L_t = Ldata_trace_2
+    L_t_x = [0.002*i for i in range(len(L_t))]
+    
+    WH_tv = []
+    for i in range(len(WH_t)-1):
+        data = (WH_t[i+1] - WH_t[i])/0.002
+        WH_tv.append(data)
+    WH_tv_x = [0.002*i for i in range(len(WH_tv))]
+    L_tv = []
+    for i in range(len(L_t)-1):
+        data = (L_t[i+1] - L_t[i])/0.002
+        L_tv.append(data)
+    L_tv_x = [0.002*i for i in range(len(L_tv))]
+
+    filter_length = 3
+    length = len(WH_j) // filter_length
+    for i in range(length):
+        value_length = WH_j[filter_length*i:filter_length*(i+1)]
+        sumv = 0
+        for k in value_length:
+            sumv += k
+        value = sumv / filter_length
+        for j in range(filter_length):
+            WH_j[i*filter_length+j] = value
+    WH_j_x = [0.002*i for i in range(len(WH_j))]
+
+    filter_length = 3
+    length = len(L_j) // filter_length
+    for i in range(length):
+        value_length = L_j[filter_length*i:filter_length*(i+1)]
+        sumv = 0
+        for k in value_length:
+            sumv += k
+        value = sumv / filter_length
+        for j in range(filter_length):
+            L_j[i*filter_length+j] = value
+    L_j_x = [0.002*i for i in range(len(WH_j))]
+
+    filter_length = 3
+    length = len(WH_tv) // filter_length
+    for i in range(length):
+        value_length = WH_tv[filter_length*i:filter_length*(i+1)]
+        sumv = 0
+        for k in value_length:
+            sumv += k
+        value = sumv / filter_length
+        for j in range(filter_length):
+            WH_tv[i*filter_length+j] = value
+    WH_tv_x = [0.002*i for i in range(len(WH_j))]
+
+    filter_length = 3
+    length = len(L_tv) // filter_length
+    for i in range(length):
+        value_length = L_tv[filter_length*i:filter_length*(i+1)]
+        sumv = 0
+        for k in value_length:
+            sumv += k
+        value = sumv / filter_length
+        for j in range(filter_length):
+            L_tv[i*filter_length+j] = value
+    L_tv_x = [0.002*i for i in range(len(WH_j))]
+
     left_edge1 = filename1.rfind('\\') + 1
     left_edge2 = filename2.rfind('\\') + 1
     right_edge1 = filename1.rfind('.')
@@ -144,21 +237,23 @@ def plot_func_add_j(filename1, filename2, ratio):
     print(filename2[left_edge2:right_edge2])
     print()
 
-    fig, axs = plt.subplots(2, 4, figsize=(16, 9))
+    fig, axs = plt.subplots(5, figsize=(16, 9))
     #fig, axs = plt.subplots(2, 3)
-    axs[0][0].plot(WHx1, WHdata_trace_1, label='CMDV', color='blue')
-    axs[0][1].plot(WHx2, WHdata_trace_2, label='CMDA', color='green')
-    axs[0][2].plot(WHx4, WHdata_trace_4, label='CMDJ', color='black')
-    axs[0][3].plot(WHx3, WHdata_trace_3, label='CMDT', color='red')
-    axs[1][0].plot(Lx1, Ldata_trace_1, label='CMDV', color='blue')
-    axs[1][1].plot(Lx2, Ldata_trace_2, label='CMDA', color='green')
-    axs[1][2].plot(Lx4, Ldata_trace_4, label='CMDJ', color='black')
-    axs[1][3].plot(Lx3, Ldata_trace_3, label='CMDT', color='red')
-    axs[0][0].set_title(filename1[left_edge1:right_edge1])
-    axs[1][0].set_title(filename2[left_edge2:right_edge2])
-    for i in range(2):
-        for j in range(4):
-            axs[i][j].legend()
+    axs[0].plot(WH_v_x, WH_v, label='WH_CMDV', color='red')
+    axs[0].plot(L_v_x, L_v, label='L_CMDV', color='black')
+    axs[1].plot(WH_a_x, WH_a, label='WH_CMDA', color='red')
+    axs[1].plot(L_a_x, L_a, label='L_CMDA', color='black')
+    axs[2].plot(WH_j_x, WH_j, label='WH_CMDJ', color='red')
+    axs[2].plot(L_j_x, L_j, label='L_CMDJ', color='black')
+    axs[3].plot(WH_t_x, WH_t, label='WH_CMDT', color='red')
+    axs[3].plot(L_t_x, L_t, label='L_CMDT', color='black')
+    axs[4].plot(WH_tv_x, WH_tv, label='WH_CMDTV', color='red')
+    axs[4].plot(L_tv_x, L_tv, label='L_CMDTV', color='black')
+
+    axs[0].set_title(filename1[left_edge1:right_edge1])
+    axs[0].set_title(filename2[left_edge2:right_edge2])
+    for i in range(5):
+        axs[i].legend()
     fig.canvas.manager.full_screen_toggle() # toggle fullscreen mode
     #plt.show()
     plt.savefig(filename1[left_edge1:right_edge1]+'-'+filename2[left_edge2:right_edge2]+'.png',dpi=365, format='png') 
@@ -211,8 +306,8 @@ def main():
     """
     #麦迪克加工问题调查\采样数据-LYNUC\L-1ms-直边Y-V2.std
     #plot_func_add_j('麦迪克加工问题调查\采样数据-维宏\W-1ms-斜边X-V1.std', '麦迪克加工问题调查\采样数据-LYNUC\L-1ms-斜边X-V1.std')
-    #plot_func_add_j('麦迪克加工问题调查\采样数据-维宏\W-1ms-直边Y-V2.std', '麦迪克加工问题调查\采样数据-LYNUC\L-1ms-直边Y-V2.std', 0.001)
-    save_data_picture()
+    plot_func_add_j('麦迪克数据可视化\\麦迪克加工问题调查\\newdata\\WH-圆弧.std', '麦迪克数据可视化\\麦迪克加工问题调查\\newdata\\L-圆弧.std', 0.002)
+    #save_data_picture()
 
 
 if __name__ == "__main__":

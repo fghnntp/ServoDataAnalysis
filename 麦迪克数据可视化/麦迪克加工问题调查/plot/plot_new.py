@@ -103,8 +103,8 @@ def get_WH_data(filename, list_ch1, list_ch2, list_ch3):
                     list_ch3.append(e_c)
 
 def plot_WH_L(save_file=False):
-    filename_WH = '麦迪克数据可视化\\麦迪克加工问题调查\\采样数据-维宏\\W-2ms-圆Y-V3.std'
-    filename_L = '麦迪克数据可视化\\麦迪克加工问题调查\\200907\\Y-2000us-圆形.csv'
+    filename_WH = '麦迪克数据可视化\\麦迪克加工问题调查\\采样数据-维宏\\W-2ms-直边X-V3.std'
+    filename_L = '麦迪克数据可视化\\麦迪克加工问题调查\\newdata\\X-2000us-直边.csv'
     WH_data_cmdv = []
     WH_data_v = []
     WH_data_cmdt = []
@@ -157,7 +157,84 @@ def plot_WH_L(save_file=False):
         L_data_ta.append(data)
     L_ta_x = [0.002*i for i in range(len(L_data_ta))]
 
+    #filter code 
+    # filter_length = 5
+    # length = len(WH_data_cmda) // filter_length
+    # for i in range(length):
+    #     value_length = WH_data_cmda[filter_length*i:filter_length*(i+1)]
+    #     sumv = 0
+    #     for k in value_length:
+    #         sumv += k
+    #     value = sumv / filter_length
+    #     for j in range(filter_length):
+    #         WH_data_cmda[i*filter_length+j] = value
+    # WH_cmda_x = [0.002*i for i in range(len(WH_data_cmda))]
 
+    # filter_length = 5
+    # length = len(L_data_cmda) // filter_length
+    # for i in range(length):
+    #     value_length = L_data_cmda[filter_length*i:filter_length*(i+1)]
+    #     sumv = 0
+    #     for k in value_length:
+    #         sumv += k
+    #     value = sumv / filter_length
+    #     for j in range(filter_length):
+    #         L_data_cmda[i*filter_length+j] = value
+    # L_cmda_x = [0.002*i for i in range(len(L_data_cmda))]
+
+    #filter code 
+    filter_length = 3
+    length = len(WH_data_cmdj) // filter_length
+    for i in range(length):
+        value_length = WH_data_cmdj[filter_length*i:filter_length*(i+1)]
+        sumv = 0
+        for k in value_length:
+            sumv += k
+        value = sumv / filter_length
+        for j in range(filter_length):
+            WH_data_cmdj[i*filter_length+j] = value
+    WH_cmdj_x = [0.002*i for i in range(len(WH_data_cmdj))]
+
+    filter_length = 3
+    length = len(L_data_cmdj) // filter_length
+    for i in range(length):
+        value_length = L_data_cmdj[filter_length*i:filter_length*(i+1)]
+        sumv = 0
+        for k in value_length:
+            sumv += k
+        value = sumv / filter_length
+        for j in range(filter_length):
+            L_data_cmdj[i*filter_length+j] = value
+    L_cmdj_x = [0.002*i for i in range(len(L_data_cmdj))]
+
+    #filter code 
+    filter_length = 5
+    length = len(WH_data_ta) // filter_length
+    for i in range(length):
+        value_length = WH_data_ta[filter_length*i:filter_length*(i+1)]
+        sumv = 0
+        for k in value_length:
+            sumv += k
+        value = sumv / filter_length
+        for j in range(filter_length):
+            WH_data_ta[i*filter_length+j] = value
+    WH_ta_x = [0.002*i for i in range(len(WH_data_ta))]
+
+    filter_length = 5
+    length = len(L_data_ta) // filter_length
+    for i in range(length):
+        value_length = L_data_ta[filter_length*i:filter_length*(i+1)]
+        sumv = 0
+        for k in value_length:
+            sumv += k
+        value = sumv / filter_length
+        for j in range(filter_length):
+            L_data_ta[i*filter_length+j] = value
+    L_ta_x = [0.002*i for i in range(len(L_data_ta))]
+
+
+
+    # cut data
     # step_WH = 738
     # step_L = 738
     # print(step_WH,step_L)
@@ -200,8 +277,8 @@ def plot_WH_L(save_file=False):
     axs[2].plot(L_cmdj_x, L_data_cmdj, label='L_cmdj', color='black')
     axs[3].plot(WH_data_time, WH_data_cmdt, label='WH_cmdt', color='red')
     axs[3].plot(L_data_time, L_data_cmdt, label='L_cmdt', color='black')
-    axs[4].plot(WH_ta_x, WH_data_ta, color='red')
-    axs[4].plot(L_ta_x, L_data_ta, color='black')
+    axs[4].plot(WH_ta_x, WH_data_ta, label='WH_cmdta',color='red')
+    axs[4].plot(L_ta_x, L_data_ta, label='L_cmdta',color='black')
 
 
     for i in range(5):
@@ -220,4 +297,4 @@ def plot_WH_L(save_file=False):
     
 
 if __name__ == "__main__":
-    plot_WH_L(save_file=True)
+    plot_WH_L(save_file=False)
