@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pylab import mpl
 
-mpl.rcParams['font.sans-serif'] = ['FangSong'] # 指定默认字体
-mpl.rcParams['axes.unicode_minus'] = False # 解决保存图像是负号'-'显示为方块的问题
+#Arial Unicode MS
+mpl.rcParams['font.sans-serif'] = ['Arial Unicode MS'] # 指定默认字体
+#mpl.rcParams['axes.unicode_minus'] = False # 解决保存图像是负号'-'显示为方块的问题
 
 
 def plot_f_av_aav(filename1, filename2):
@@ -80,7 +81,7 @@ def plot_f_av_aav(filename1, filename2):
     plt.show()
 
 def get_data(filename, data_trace_1, data_trace_2, data_trace_3):
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding='gbk') as f:
         for line in f.readlines():
             _ = line[:-1].split(',')
             if _[0][:-5] == 'DataTrace1-TraceData':
@@ -270,10 +271,10 @@ def ACTV_CMDT_CMDV_33(filename1, filename2, filename3):
     plt.show()
 
 def main():
-    filename_5 = ['木工加工数据可视化\\A-MDI下执行F10000.std', '木工加工数据可视化\\C-运行加工程序采集.std', '木工加工数据可视化\\U-运行加工程序采集.std', 
-                '木工加工数据可视化\\X-运行加工程序采集.std', '木工加工数据可视化\\Z-MDI下执行F10000.std']
-    ACTV_CMDT_CMDV_55(filename_5[0], filename_5[1], filename_5[2], filename_5[3], filename_5[4])
-    filename_3 = ['木工加工数据可视化\\铼钠克-X-MDIF10000.std', '木工加工数据可视化\\铼钠克-X-MDIF10000-99.std', '木工加工数据可视化\\欧赛-x-MDI-F10000.std']
+    # filename_5 = ['木工加工数据可视化\\A-MDI下执行F10000.std', '木工加工数据可视化\\C-运行加工程序采集.std', '木工加工数据可视化\\U-运行加工程序采集.std', 
+    #             '木工加工数据可视化\\X-运行加工程序采集.std', '木工加工数据可视化\\Z-MDI下执行F10000.std']
+    #ACTV_CMDT_CMDV_55(filename_5[0], filename_5[1], filename_5[2], filename_5[3], filename_5[4])
+    filename_3 = ['木工加工数据可视化/铼钠克-X-MDIF10000.std', '木工加工数据可视化/铼钠克-X-MDIF10000.std', '木工加工数据可视化/欧赛-x-MDI-F10000.std']
     ACTV_CMDT_CMDV_33(filename_3[0], filename_3[1], filename_3[2])
 
 if __name__ == "__main__":
