@@ -1,0 +1,26 @@
+{
+    "setting":{
+        "numbers": "256",
+        "sampletime": "0.002000",
+    
+        "ch1eable": "1",
+        "ch1title": "#1 Command Velocity", 
+        "ch1color": "180,0,0",
+        "ch1lrsrc": "1",
+
+        "ch2eable": "1",
+        "ch2title": "#1 Command Acceleration",
+        "ch2color": "0,0,120",
+        "ch2lrsrc": "2",
+
+        "ch3eable": "1",
+        "ch3title": "#1 Command Jerk",
+        "ch3color": "0,120,0",
+        "ch3lrsrc": "3",
+
+        "ch4eable": "1",
+        "ch4title": "#1 Command Torque",
+        "ch4color": "0,120,0",
+        "ch4lrsrc": "4"
+    }
+}
