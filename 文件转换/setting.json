@@ -21,6 +21,11 @@
         "ch4eable": "1",
         "ch4title": "#1 Command Torque",
         "ch4color": "0,120,0",
-        "ch4lrsrc": "4"
+        "ch4lrsrc": "4",
+
+        "ch5eable": "1",
+        "ch5title": "#1 Command Torque Diff",
+        "ch5color": "0,0,0",
+        "ch5lrsrc": "5"
     }
 }

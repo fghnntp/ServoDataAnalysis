@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="pushButtonSelectFile">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>130</y>
+     <x>140</x>
+     <y>60</y>
      <width>112</width>
      <height>32</height>
     </rect>
@@ -26,17 +26,30 @@
     <string>选择文件</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButtonTransferStaring">
+  <widget class="QPushButton" name="pushButtonTransferRDI">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>140</x>
      <y>130</y>
      <width>112</width>
      <height>32</height>
     </rect>
    </property>
    <property name="text">
-    <string>开始转换</string>
+    <string>转换为.dat</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButtonTransferPVT">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>200</y>
+     <width>112</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>转换为.pvt</string>
    </property>
   </widget>
  </widget>
