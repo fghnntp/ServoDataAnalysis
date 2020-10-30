@@ -26,6 +26,12 @@
         "ch5eable": "1",
         "ch5title": "#1 Command Torque Diff",
         "ch5color": "0,0,0",
-        "ch5lrsrc": "5"
+        "ch5lrsrc": "5",
+
+        "ch6eable": "1",
+        "ch6title": "#1 Feedback Velocity",
+        "ch6color": "0,0,0",
+        "ch6lrsrc": "6"
+
     }
 }

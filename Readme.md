@@ -8,3 +8,4 @@
         1.设置setting.json,注意将numbers参数改为合适的数量
         2.打开支持进行转换的文件，现支持：安川、汇川
         3.点击需要转换文件的转换按钮
+    将main.py转换为.exe文件的指令 pyinstaller -F main.py -i bitbug_favicon.ico 

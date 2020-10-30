@@ -29,7 +29,7 @@ class mainWindow(QDialog):
             *.dat   RDI文件
             *.pvt   LySmNC文件
         """
-        fileName, fileType = QFileDialog.getOpenFileName(self, "选取文件", os.getcwd(), "std Files(*.std);csv Files(*.csv);;ALL Files(*)")
+        fileName, fileType = QFileDialog.getOpenFileName(self, "选取文件", os.getcwd(), "std Files(*.std);;csv Files(*.csv);;ALL Files(*)")
         self.filename_src = fileName
         self.filename_des = fileName[fileName.rfind("/")+1:fileName.rfind(".")]+".dat"
 
