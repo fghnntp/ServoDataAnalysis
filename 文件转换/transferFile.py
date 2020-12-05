@@ -89,18 +89,49 @@ def get_data_from_huichuan(file_src, data_trace_cmdv, data_trace_cmdt):
                 data_trace_cmdv.append(eval(row[v_flag][1:]))
                 data_trace_cmdt.append(eval(row[t_flag][1:]))
 
+def get_data_from_addsensor(file_src, data_trace_acc_x, data_trace_acc_y, data_trace_acc_z):
+    count = 0
+    print(file_src)
+    with open(file_src, 'r', encoding='gbk') as f:
+        for line in f.readlines():
+            print(line)
+            coutn += 1
+            if count > 1:
+                # date 在这里代表的是被用,进行分隔的单元数据,为字符串类型
+                data = line.split()
+                print(data)
+                #将加速度传感器的三维数据取出
+                data_trace_acc_x.append(data[3])
+                data_trace_acc_y.append(data[4])
+                data_trace_acc_z.append(data[5])
 
 def add_data2RDI(file_src, file_des):
     # 接受数据v：速度,t：力矩
     data_trace_v = []
     data_trace_t = []
     data_trace_f_v = []
+    data_trace_acc_x = []
+    data_trace_acc_y = []
+    data_trace_acc_z = []
+    add_sensor = False
     # 根据文件名后缀选择获取文件数据函数,返回的数据均为字符串类型
     if(file_src[file_src.rfind('.'):] == '.std'):
         get_data_from_anchuan(file_src, data_trace_v,
                               data_trace_t, data_trace_f_v)
-    if(file_src[file_src.rfind('.'):] == '.csv'):
+    elif(file_src[file_src.rfind('.'):] == '.csv'):
         get_data_from_huichuan(file_src, data_trace_v, data_trace_t)
+    elif(file_src[file_src.rfind('.'):] == '.xls'):
+        get_data_from_addsensor(file_src, data_trace_acc_x, data_trace_acc_y, data_trace_acc_z)
+        add_sensor = True
+    #将加速度传感器的数据写入文件
+    if add_sensor:
+        with open(file_des, 'a') as f:
+            length = min(len(data_trace_acc_x), len(data_trace_acc_y), len(data_trace_acc_z))
+            for i in range(length):
+                f.write(data_trace_acc_x[i]+','+data_trace_acc_y[i]+','+data_trace_acc_z[i]+'\n')
+        #test
+        print(123)
+        return
     # 将所有的数据转换为float类型
     data_trace_v = [eval(i) for i in data_trace_v]
     data_trace_t = [eval(i) for i in data_trace_t]
