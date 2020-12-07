@@ -92,18 +92,17 @@ def get_data_from_huichuan(file_src, data_trace_cmdv, data_trace_cmdt):
 def get_data_from_addsensor(file_src, data_trace_acc_x, data_trace_acc_y, data_trace_acc_z):
     count = 0
     print(file_src)
-    with open(file_src, 'r', encoding='gbk') as f:
+    with open(file_src, 'r', encoding='utf-8') as f:
         for line in f.readlines():
-            print(line)
-            coutn += 1
+            count += 1
             if count > 1:
                 # date 在这里代表的是被用,进行分隔的单元数据,为字符串类型
                 data = line.split()
-                print(data)
                 #将加速度传感器的三维数据取出
-                data_trace_acc_x.append(data[3])
-                data_trace_acc_y.append(data[4])
-                data_trace_acc_z.append(data[5])
+                if len(data) > 3:
+                    data_trace_acc_x.append(data[3])
+                    data_trace_acc_y.append(data[4])
+                    data_trace_acc_z.append(data[5])
 
 def add_data2RDI(file_src, file_des):
     # 接受数据v：速度,t：力矩
@@ -129,8 +128,6 @@ def add_data2RDI(file_src, file_des):
             length = min(len(data_trace_acc_x), len(data_trace_acc_y), len(data_trace_acc_z))
             for i in range(length):
                 f.write(data_trace_acc_x[i]+','+data_trace_acc_y[i]+','+data_trace_acc_z[i]+'\n')
-        #test
-        print(123)
         return
     # 将所有的数据转换为float类型
     data_trace_v = [eval(i) for i in data_trace_v]
