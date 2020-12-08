@@ -8,7 +8,7 @@ result_list = []
 t = 0
  
 while True:
-    if t >= 10 * np.pi:
+    if t >= 100 * np.pi:
         plt.clf()
         t = 0
         t_list.clear()
