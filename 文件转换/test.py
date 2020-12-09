@@ -6,7 +6,7 @@ plt.figure(1)
 t_list = []
 result_list = []
 t = 0
- 
+"""/c/Users/liuleyong/AppData/Roaming/Python/Python39/Scripts"""
 while True:
     if t >= 100 * np.pi:
         plt.clf()
