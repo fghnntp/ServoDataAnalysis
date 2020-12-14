@@ -8,6 +8,7 @@ def plot_data_chan(row, col, data_chan_num, data_chans, plot_setting, locate):
         fig, axs = plt.subplots(row, col)
     x = eval(plot_setting[numbers])
     sampletime = eval(plot_setting[sampletime])
+    data_chan_
     x = [sampletime*i for i in x]
     for i in range(row):
         for j in range(col):

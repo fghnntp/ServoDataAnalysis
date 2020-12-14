@@ -119,7 +119,7 @@ class mainWindow(QDialog):
     def plot_data(self):
         """绘制图形"""
         pass
-        #plot_data_chan(self.row, self.col, self.data_chan_num, self.data_src[:], self.plot_setting, self.plot_locate[:])
+        #plot_data_chan(self.row, self.col, self.data_chan_num, self.data_src, self.plot_setting, self.plot_locate)
           
 if __name__ == "__main__":
     app=QApplication(sys.argv)

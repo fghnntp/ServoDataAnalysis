@@ -92,7 +92,7 @@ def get_data_from_huichuan(file_src, data_trace_cmdv, data_trace_cmdt):
 def get_data_from_addsensor(file_src, data_trace_acc_x, data_trace_acc_y, data_trace_acc_z):
     count = 0
     print(file_src)
-    with open(file_src, 'r', encoding='utf-8') as f:
+    with open(file_src, 'r', encoding='gbk') as f:
         for line in f.readlines():
             count += 1
             if count > 1:
@@ -111,7 +111,7 @@ def add_data2RDI(file_src, file_des):
     data_trace_f_v = []
     data_trace_acc_x = []
     data_trace_acc_y = []
-    # data_trace_acc_z = []
+    data_trace_acc_z = []
     add_sensor = False
     # 根据文件名后缀选择获取文件数据函数,返回的数据均为字符串类型
     if(file_src[file_src.rfind('.'):] == '.std'):
